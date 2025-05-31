@@ -16,19 +16,20 @@ def view_markdown_file(filepath):
         console.print(f"[bold red]An error occurred:[/bold red] {e}")
 
 
-def main() -> None:
-    parser = argparse.ArgumentParser(
-        description="mdv: Markdown viewer, in the terminal."
-    )
-    parser.add_argument(
-        "filename",
-        nargs="?",
-        help="Markdown file to view"
-    )
-    args = parser.parse_args()
 
-    if not args.filename:
-        print("Please provide a markdown file to view.", file=sys.stderr)
-        sys.exit(1)
+parser = argparse.ArgumentParser(
+    description="mdv: Markdown viewer, in the terminal."
+)
+parser.add_argument(
+    "filename",
+    nargs="?",
+    help="Markdown file to view"
+)
+args = parser.parse_args()
 
-    view_markdown_file(args.filename)
+if not args.filename:
+    # The warning suppression is for runtime, this print still works as expected
+    print("Please provide a markdown file to view.", file=sys.stderr)
+    sys.exit(1)
+
+view_markdown_file(args.filename)
