@@ -1,5 +1,20 @@
 import argparse
+from rich.console import Console
+from rich.markdown import Markdown
 import sys
+
+def view_markdown_file(filepath):
+    console = Console()
+    try:
+        with open(filepath, "r", encoding="utf-8") as md_file:
+            content = md_file.read()
+        markdown = Markdown(content)
+        console.print(markdown)
+    except FileNotFoundError:
+        console.print(f"[bold red]Error:[/bold red] File not found at '{filepath}'")
+    except Exception as e:
+        console.print(f"[bold red]An error occurred:[/bold red] {e}")
+
 
 def main() -> None:
     parser = argparse.ArgumentParser(
@@ -16,10 +31,4 @@ def main() -> None:
         print("Please provide a markdown file to view.", file=sys.stderr)
         sys.exit(1)
 
-    try:
-        with open(args.filename, "r") as f:
-            content = f.read()
-        print(content)
-    except Exception as e:
-        print(f"Error: {e}", file=sys.stderr)
-        sys.exit(1)
+    view_markdown_file(args.filename)
