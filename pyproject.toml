@@ -1,0 +1,19 @@
+[project]
+name = "mdv"
+version = "0.0.1"
+description = "Markdown, in your terminal."
+readme = "README.md"
+authors = [
+    { name = "Zachary Jones", email = "zacharyj@orbical.dev" }
+]
+requires-python = ">=3.12"
+dependencies = [
+    "rich>=14.0.0",
+]
+
+[project.scripts]
+mdv = "mdv:main"
+
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
